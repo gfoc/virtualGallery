@@ -1,0 +1,76 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    
+
+    <div class="text-[13vh] ml-[2vw] uppercase font-semibold flex justify-center items-center ">
+        Art Comes Alive here 
+    </div>
+
+    <div class=" h-[65vh]">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+            <div class="carousel-item active h-[65vh] object-cover">
+              <img src="https://plus.unsplash.com/premium_photo-1664438942574-e56510dc5ce5?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item h-[65vh]">
+              <img src="https://arts.mojarto.com/productImages/MA340495/primary/1200/MA340495.jpeg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item h-[65vh]">
+              <img src="https://images.unsplash.com/photo-1567061698906-fc74288ce52a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+    </div> 
+
+        <div class="mt-6 px-6 py-12 rounded-xl">
+
+        <h2 class="mb-24 text-6xl text-center font-semibold uppercase">Newest items</h2>
+
+        <div class="grid grid-cols-4 gap-3">
+            {% for item in items %}
+                <div>
+                    <a href="{% url 'item:detail' item.id %}">
+                        <div class="relative rounded-2xl">
+                            <img src="{{ item.image.url }}" class="rounded-t-xl">
+                            <span class="absolute bottom-[50%] right-[25%] text-[#fff] text-5xl font-semibold opacity-70 p-1">ArtFolio</span>
+                            <div class="p-6 bg-[#222222] rounded-lg opacity-60 absolute bottom-0 right-0 text-white w-[100%]">
+                                <h2 class="text-2xl">{{ item.name }}</h2>
+                                <p class="text-white">Price: {{ item.price }}</p>
+                            </div>
+                        </div>                        
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+    <div class="mt-6 px-6 py-12 bg-[#222222] rounded-xl opacity-90">
+        <h2 class="mb-24 text-white text-6xl text-center font-semibold uppercase">Categories</h2>
+        <div class="grid grid-cols-3 gap-3">
+            {% for category in categories %}
+                <div>
+                    <a href="{% url 'item:items' %}">
+                        <div class="p-6 bg-[#383838] rounded-b-xl">
+                            <h2 class="text-xl text-white">{{ category.name }}</h2>
+                            <p class="text-white">{{ category.items.count }} items</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

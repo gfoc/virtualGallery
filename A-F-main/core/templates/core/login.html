@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+   
+
+    <div class="relative w-[50vw] mx-auto bg-[#222222] rounded-2xl backdrop-filter backdrop-blur-md border-2 border-white shadow-lg py-10 px-7"> 
+    <form method="post" action=".">
+        {% csrf_token %}
+
+
+        <h1 class="text-white text-center text-2xl font-semibold mb-8l">Log in</h1>
+
+        <div>
+            <div class="mb-3">
+                <label class="text-white text-lg font-semibold">Username</label><br>
+                {{ form.username }}
+            </div>
+    
+            <div class="mb-3">
+                <label class="text-white text-lg font-semibold mt-4">Password</label><br>
+                {{ form.password }}
+            </div>
+    
+            {% if form.errors or form.non_field_errors %}
+                <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                    {% for field in form %}
+                        {{ field.errors }}
+                    {% endfor %}
+    
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+    
+            <button class="w-full bg-white text-gray-900 text-lg font-semibold rounded-md py-3 mt-8 ">Submit</button>
+
+        </div>
+
+
+        
+    </form>
+</div>
+{% endblock %}
